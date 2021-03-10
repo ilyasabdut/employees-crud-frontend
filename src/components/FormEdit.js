@@ -4,29 +4,44 @@ import NavBar from "./NavBar";
 import services from "../services/services";
 import Modali, { useModali } from "modali";
 
-export default function Form() {
-//   const [resp, setPositionsData] = useState([]);
-//   const [currentPosition, setCurrentPosition] = useState(0)
+export default function FormEdit(employee) {
+  //   const [resp, setPositionsData] = useState([]);
+  //   const [currentPosition, setCurrentPosition] = useState(0)
 
-//   const changePosition = (newPosition) => {
-//     setCurrentPosition(newPosition)
-//   }
+  //   const changePosition = (newPosition) => {
+  //     setCurrentPosition(newPosition)
+  //   }
 
-//   useEffect(() => {
-//     retrievePositions();
-//   }, []);
+  //   useEffect(() => {
+  //     retrievePositions();
+  //   }, []);
 
-//   const retrievePositions = () => {
-//     services
-//       .getPositions()
-//       .then((response) => {
-//         setPositionsData(response.data);
-//         console.log(response.data);
-//       })
-//       .catch((e) => {
-//         console.log(e);
-//       });
-//   };
+  //   const retrievePositions = () => {
+  //     services
+  //       .getPositions()
+  //       .then((response) => {
+  //         setPositionsData(response.data);
+  //         console.log(response.data);
+  //       })
+  //       .catch((e) => {
+  //         console.log(e);
+  //       });
+  //   };
+
+  const getEmployee = id => {
+    services.get(id)
+      .then(response => {
+        setEmployees(response.data);
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    getEmployee(employee.id);
+  }, [employee.id]);
 
   const initialEmployeesState = {
     id: null,
@@ -37,6 +52,7 @@ export default function Form() {
     gender: null,
     is_delete: 0,
   };
+
   const [employees, setEmployees] = useState(initialEmployeesState);
   const [submitted, setSubmitted] = useState(false);
 
@@ -45,28 +61,10 @@ export default function Form() {
     setEmployees({ ...employees, [name]: value });
   };
 
-  const saveEmployees = () => {
-    var data = {
-      name: employees.name,
-      birth_date: employees.birth_date,
-      position_id: employees.position_id,
-      id_number: employees.id_number,
-      gender: employees.gender,
-    };
-
+  const updateEmployees = () => {
     services
-      .createData(data)
+      .update(employee.employee.id, employees)
       .then((response) => {
-        setEmployees({
-          id: response.data.id,
-          name: response.data.name,
-          birth_date: response.data.birth_date,
-          position_id: response.data.position_id,
-          id_number: response.data.id_number,
-          gender: response.data.gender,
-          is_delete: 0,
-        });
-        setSubmitted(true);
         console.log(response.data);
       })
       .catch((e) => {
@@ -87,7 +85,7 @@ export default function Form() {
       <Modali.Button
         label="Yes"
         isStyleDestructive
-        onClick={() => saveEmployees()}
+        onClick={() => updateEmployees()}
       />,
     ],
   });

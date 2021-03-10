@@ -7,7 +7,10 @@ const getAll = () => {
 const getPositions = () => {
   return axios.get("/positions");
 };
-
+const get = id => {
+    return axios.get(`/employees/${id}`);
+  };
+  
 const createData = (data) => {
   return axios.post("/employees", data);
 };
@@ -23,6 +26,7 @@ const remove = (id, data) => {
 export default {
   getAll,
   getPositions,
+  get,
   createData,
   update,
   remove,

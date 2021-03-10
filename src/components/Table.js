@@ -1,9 +1,8 @@
-
 import { Link } from "react-router-dom";
 import DeleteButton from "./Buttons/DeleteButton";
 
 export default function Table({ employee }) {
-  const isGender = (employee.gender = 1);
+  const isGender = employee.gender === 1;
   return (
     <tr>
       <td>{employee.id}</td>
@@ -13,8 +12,10 @@ export default function Table({ employee }) {
       <td>{employee.id_number}</td>
       {isGender ? <td>Pria</td> : <td>Wanita</td>}
       <td>
-        <Link to="/Form">
-          <button className="btn btn-primary btn-md mr-1">Edit</button>
+        <Link to={"/FormEdit/" + employee.id} employee={employee}>
+          <button className="btn btn-primary btn-md mr-1">
+            <i class="fas fa-edit"></i>
+          </button>
         </Link>
 
         <DeleteButton employee={employee}></DeleteButton>

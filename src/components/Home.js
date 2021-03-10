@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import services from "../services/services";
+import NavBar from "./NavBar";
 import Table from "./Table";
 import AddButton from "./Buttons/AddButton";
 
@@ -25,19 +26,18 @@ function Home() {
 
   return (
     <div className="Home">
-      <nav className="navbar navbar-light bg-light">
-        <span className="navbar-brand mb-0 h1">Ilyas Abduttawab</span>
-      </nav>
-
       <div className="container">
-        <Link to="/Form">
-          <AddButton></AddButton>
-        </Link>
+        <NavBar></NavBar>
+
+        <h1 style={{textAlign: "center"}}>MASTER KARYAWAN</h1>
 
         <div className="card">
           <div className="card-header">List Karyawan</div>
 
           <div className="card-body">
+            <Link to="/Form">
+              <AddButton></AddButton>
+            </Link>
             <table
               id="tableEmployees"
               className="table"
