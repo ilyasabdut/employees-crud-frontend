@@ -4,7 +4,6 @@ import Home from "./components/Home";
 import Form from "./components/Form";
 import FormEdit from "./components/FormEdit";
 
-
 function App() {
   return (
     <Router>
@@ -16,7 +15,7 @@ function App() {
         <Route exact path="/Form">
           <Form />
         </Route>
-        <Route exact path="/FormEdit">
+        <Route exact path="/FormEdit/:id">
           <FormEdit />
         </Route>
       </Switch>

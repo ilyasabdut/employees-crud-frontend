@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import NavBar from "./NavBar";
 import services from "../services/services";
 import Modali, { useModali } from "modali";
 
-export default function FormEdit(employee) {
+export default function FormEdit() {
   //   const [resp, setPositionsData] = useState([]);
   //   const [currentPosition, setCurrentPosition] = useState(0)
 
@@ -28,20 +28,23 @@ export default function FormEdit(employee) {
   //       });
   //   };
 
-  const getEmployee = id => {
-    services.get(id)
-      .then(response => {
+  const { id } = useParams();
+
+  const getEmployee = (id) => {
+    services
+      .get(id)
+      .then((response) => {
         setEmployees(response.data);
         console.log(response.data);
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   };
 
   useEffect(() => {
-    getEmployee(employee.id);
-  }, [employee.id]);
+    getEmployee(id);
+  }, [id]);
 
   const initialEmployeesState = {
     id: null,
@@ -63,8 +66,9 @@ export default function FormEdit(employee) {
 
   const updateEmployees = () => {
     services
-      .update(employee.employee.id, employees)
+      .update(id, employees)
       .then((response) => {
+        setSubmitted(true);
         console.log(response.data);
       })
       .catch((e) => {
@@ -95,7 +99,7 @@ export default function FormEdit(employee) {
       <NavBar></NavBar>
 
       <div className="card">
-        <div className="card-header">Add Data Karyawan</div>
+        <div className="card-header">Edit Data Karyawan</div>
 
         <div className="card-body">
           <form>

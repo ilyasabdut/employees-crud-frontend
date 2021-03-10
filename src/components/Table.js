@@ -12,7 +12,7 @@ export default function Table({ employee }) {
       <td>{employee.id_number}</td>
       {isGender ? <td>Pria</td> : <td>Wanita</td>}
       <td>
-        <Link to={"/FormEdit/" + employee.id} employee={employee}>
+        <Link to={`/FormEdit/${employee.id}`}>
           <button className="btn btn-primary btn-md mr-1">
             <i class="fas fa-edit"></i>
           </button>
